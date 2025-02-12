@@ -37,12 +37,10 @@ message ScheduleResponse {
 
 //MARK: Render
 message RequestRender {
-    uint32 sprite_id = 1;
     bytes schedule_item_uuid = 2;
 }
 
 message RenderResponse {
-    uint32 sprite_id = 1;
     bytes schedule_item_uuid = 2;
     bytes sprite_data = 3;
     uint64 sprite_size = 4;

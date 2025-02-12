@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
     
 set(PROTO_COMPILER "protoc")
-set(PROTO_C_COMPILER "protoc-c")
+set(PROTO_C_COMPILER "protoc")
 set(C_OUT_PATH "${CMAKE_CURRENT_LIST_DIR}/proto-c")
     
 set(PROTO_SRCS 
@@ -14,7 +14,7 @@ set(pb_csrcs
     
 if(NOT CMAKE_BUILD_EARLY_EXPANSION)
     add_custom_command(OUTPUT ${pb_csrcs}
-            COMMAND ${PROTO_C_COMPILER} --c_out=${C_OUT_PATH} -I . ${PROTO_SRCS}
+            COMMAND ${PROTO_C_COMPILER} -I ${CMAKE_CURRENT_LIST_DIR} --c_out=${C_OUT_PATH} ${PROTO_SRCS}
             DEPENDS ${PROTO_SRCS}
             VERBATIM)
 endif()
