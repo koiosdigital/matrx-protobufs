@@ -23,12 +23,16 @@ message RequestSchedule {
 
 }
 
+message ScheduleItemUUID {
+    repeated uint32 packed_bytes = 1;
+}
+
 message ScheduleItem {
-    bytes schedule_item_uuid = 1;
-    uint32 schedule_position = 2;
+    ScheduleItemUUID uuid = 1;
     uint32 display_time = 3;
     bool pinned = 4;
-    bool skipped = 5;
+    bool skipped_by_user = 5;
+    bool skipped_by_server = 6;
 }
 
 message ScheduleResponse {
@@ -37,13 +41,12 @@ message ScheduleResponse {
 
 //MARK: Render
 message RequestRender {
-    bytes schedule_item_uuid = 2;
+    ScheduleItemUUID uuid = 1;
 }
 
 message RenderResponse {
-    bytes schedule_item_uuid = 2;
+    ScheduleItemUUID uuid = 1;
     bytes sprite_data = 3;
-    uint64 sprite_size = 4;
     bool render_error = 5;
 }
 
@@ -62,9 +65,9 @@ message Restart {
 }
 
 message PinScheduleItem {
-    bytes schedule_item_uuid = 1;
+    ScheduleItemUUID schedule_item_uuid = 1;
 }
 
 message SkipScheduleItem {
-    bytes schedule_item_uuid = 1;
+    ScheduleItemUUID schedule_item_uuid = 1;
 }
