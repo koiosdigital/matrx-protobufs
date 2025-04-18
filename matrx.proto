@@ -2,45 +2,6 @@ syntax = "proto3";
 
 package matrx;
 
-//MARK: Cert Manager
-message CertMgrMessage {
-    oneof message {
-        ProvisioningStatusRequest provisioning_status_request = 1; //to server
-        ProvisioningStatusResponse provisioning_status_response = 2; //from server
-        CSRRequest csr_request = 3; //to server
-        CSRResponse csr_response = 4; //from server
-        SetCertRequest set_cert_request = 5; //to server
-        SetCertResponse set_cert_response = 6; //from server
-    }
-}
-
-message ProvisioningStatusRequest {
-
-}
-
-message ProvisioningStatusResponse {
-    bool has_csr = 1;
-    bool has_cert = 2;
-}
-
-message CSRRequest {
-    
-}
-
-message CSRResponse {
-    bytes csr = 1;
-    uint32 csr_size = 2;
-}
-
-message SetCertRequest {
-    bytes cert = 1;
-    uint32 cert_size = 2;
-}
-
-message SetCertResponse {
-    bool success = 1;
-}
-
 //MARK: Sockets
 message SocketMessage {
     oneof message {
@@ -63,12 +24,8 @@ message RequestSchedule {
 
 }
 
-message ScheduleItemUUID {
-    repeated uint32 packed_bytes = 1;
-}
-
 message ScheduleItem {
-    ScheduleItemUUID uuid = 1;
+    bytes uuid = 1;
     uint32 display_time = 3;
     bool pinned = 4;
     bool skipped_by_user = 5;
@@ -81,11 +38,11 @@ message ScheduleResponse {
 
 //MARK: Render
 message RequestRender {
-    ScheduleItemUUID uuid = 1;
+    bytes uuid = 1;
 }
 
 message RenderResponse {
-    ScheduleItemUUID uuid = 1;
+    bytes uuid = 1;
     bytes sprite_data = 3;
     bool render_error = 5;
 }
@@ -105,9 +62,9 @@ message Restart {
 }
 
 message PinScheduleItem {
-    ScheduleItemUUID schedule_item_uuid = 1;
+    bytes schedule_item_uuid = 1;
 }
 
 message SkipScheduleItem {
-    ScheduleItemUUID schedule_item_uuid = 1;
+    bytes schedule_item_uuid = 1;
 }
